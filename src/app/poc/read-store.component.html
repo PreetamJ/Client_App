@@ -1,0 +1,17 @@
+<div>
+
+    <button type="button" (click)="readAndStore()">Click me</button>
+</div>
+
+
+<div *ngIf="message">
+    <h5>
+        <font color="red">Json stored successfully!!</font>
+    </h5>
+
+    <h4>Show Tree map from DB Heirarchy data</h4>
+
+    <button type="button" onclick="showMap();">Click me</button> 
+    <input [(ngModel)]="dataObj" type="hidden" id="valueData">
+    
+</div>
