@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ReadStoreComponent } from './poc/read-store.component';
+import { POCComponent } from './poc/poc.component';
 
 @NgModule({
   declarations: [
-    AppComponent, ReadStoreComponent],
+    AppComponent, POCComponent],
   imports: [
     BrowserModule,
     FormsModule,

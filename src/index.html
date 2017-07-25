@@ -9,68 +9,6 @@
 
 
   <base href="/">
-  <script>
-    function showMap() {
-      console.log("inside div");
-      data = JSON.parse(document.getElementById('valueData').value);
-      var canvas = d3.select("body").append("svg").attr("width", 1000)
-        .attr("height", 1000).append("g").attr("transform", "translate(500,500)");
-
-      //var group = canvas.append("g").attr("transform", "translate(150,150)");
-
-
-      var stratify = d3.stratify()
-        .parentId(function (d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
-
-      var tree = d3.tree()
-        .size([2 * Math.PI, 500]);
-
-      var root = d3.hierarchy(data);
-      tree(root);
-
-      console.log(root.descendants());
-
-      console.log(root.descendants().slice(1));
-
-      var link = canvas.selectAll(".link")
-        .data(root.links())
-        .enter().append("path")
-        .attr("class", "link")
-        .attr("d", d3.linkRadial()
-          .angle(function (d) { return d.x; })
-          .radius(function (d) { return d.y; }));
-
-      var node = canvas.selectAll(".node")
-        .data(root.descendants())
-        .enter().append("g")
-        .attr("class", function (d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-        .attr("transform", function (d) { return "translate(" + radialPoint(d.x, d.y) + ")"; });
-
-      node.append("circle")
-        .attr("r", 2.5)
-        .attr("fill", "red");
-
-      node.append("text")
-        .attr("dy", "0.31em")
-        .attr("x", function (d) { return d.x < Math.PI === !d.children ? 6 : -6; })
-        .attr("text-anchor", function (d) { return d.x < Math.PI === !d.children ? "start" : "end"; })
-        .attr("transform", function (d) { return "rotate(" + (d.x < Math.PI ? d.x - Math.PI / 2 : d.x + Math.PI / 2) * 180 / Math.PI + ")"; })
-        .text(function (d) { return d.data.id; });
-
-      var link = canvas.selectAll(".link")
-        .data(root.links())
-        .enter().append("path")
-        .attr("class", "link")
-        .attr("d", d3.linkRadial()
-          .angle(function (d) { return d.x; })
-          .radius(function (d) { return d.y; }));
-
-    }
-    function radialPoint(x, y) {
-      return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
-    }
-
-  </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">

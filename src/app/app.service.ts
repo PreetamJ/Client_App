@@ -15,14 +15,15 @@ export class POCService {
     readNStore() {
         console.log("Inside readNStore");
         return this.http.get(this.readAndStoreUrl).map(res => res.text);
-    } 
+    }
 
     showTree() {
         console.log("Inside showTree");
         return this.http.get(this.showTreeMapeUrl)
             .map(response => response.json(),
-                  error => console.log(error));
+            error => console.log(error));
+
     }
 
-    
+
 }
