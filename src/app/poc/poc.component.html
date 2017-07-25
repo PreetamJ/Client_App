@@ -1,0 +1,16 @@
+<div>
+
+    <button type="button" (click)="readAndStore()">Click me</button>
+</div>
+
+
+<div *ngIf="message">
+    <h5>
+        <font color="red">Json stored successfully!!</font>
+    </h5>
+    <div *ngIf="message" id="showTreeDiv">
+        <h4>Show Tree map from DB Hierarchy data</h4>
+
+        <button type="button" (click)="showTreeMap()">Click me</button>
+    </div>
+</div>
