@@ -26,28 +26,36 @@ export class POCComponent {
      * This method calls REST service from POCController which reads JSON file and stores it in Hierarchy collection
      * Returns message from REST service whether it went successful or not
      */
-    readAndStore() {
-        console.log("Inside readAndStore");
-        this.pocService.readNStore().subscribe(data => this.message = data,
-            error => console.log(error));
-        console.log(this.message);
+    readAndStore(event) {
+        console.log("Inside readAndStore :component");
 
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            let file =fileList[0];
+            let formData=new FormData();
+            formData.append('file',file,file.name);
+            this.pocService.readNStore(formData).subscribe(data => {
+                this.message = data
+                console.log(data)
+            },
+                error => console.log());
+        }
     }
     /**
      * This method invokes REST service from POCController which retrieves data from Hierarchy table and displayes it in Radial Tree View
      */
     showTreeMap() {
-        console.log("Inside showTreeMap");
-        this.pocService.showTree().subscribe(data => this.createTree(data),
+        console.log("Inside showTreeMap : component");
+        this.pocService.showTree(this.message).subscribe(data => this.createTree(data),
             error => console.log(error));
         console.log("inside showTreeMap**" + this.dataObj);
 
     }
 
-/**
- * Creates a Radial Tree View from dataObject received 
- * @param dataObject 
- */
+    /**
+     * Creates a Radial Tree View from dataObject received 
+     * @param dataObject 
+     */
     createTree(dataObject) {
         console.log("inside div");
         console.log(dataObject);

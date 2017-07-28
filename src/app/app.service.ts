@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers } from '@angular/http';
+import { Http, RequestOptions, Response, Headers, URLSearchParams } from '@angular/http';
 
 
 import 'rxjs/add/operator/map';
@@ -12,14 +12,20 @@ export class POCService {
 
     constructor(private http: Http) { }
 
-    readNStore() {
-        console.log("Inside readNStore");
-        return this.http.get(this.readAndStoreUrl).map(res => res.text);
+    readNStore(formData) {
+        console.log("Inside readNStore:service");
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.readAndStoreUrl, formData, options).map((res: Response) => res.text());
     }
 
-    showTree() {
-        console.log("Inside showTree");
-        return this.http.get(this.showTreeMapeUrl)
+    showTree(id: string) {
+        console.log("Inside showTree :service");
+        console.log("id **:" + id);
+        let options = new RequestOptions({ search: new URLSearchParams('id=' + id) });
+
+        return this.http.get(this.showTreeMapeUrl, options)
             .map(response => response.json(),
             error => console.log(error));
 
